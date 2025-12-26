@@ -6,9 +6,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-18-blue.svg)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-5-purple.svg)](https://vitejs.dev)
+[![Vite](https://img.shields.io/badge/Vite-7-purple.svg)](https://vitejs.dev)
+![Views](https://komarev.com/ghpvc/?username=realgauravmehta&repo=OpenVisaSG&label=Views&color=brightgreen&style=flat)
 
-[Try It Live](#) • [Features](#features) • [Quick Start](#quick-start) • [How It Works](#how-it-works)
+[**🚀 Try It Live**](https://realgauravmehta.github.io/OpenVisaSG/) • [Features](#-features) • [Quick Start](#-quick-start) • [How It Works](#-how-it-works)
 
 </div>
 
@@ -21,7 +22,7 @@ OpenVisaSG creates **ICA-compliant Singapore visa photos** directly in your brow
 - ✅ **400×514px** output (official ICA digital format)
 - ✅ **35×45mm** aspect ratio
 - ✅ **White background** automatically applied
-- ✅ **75% face coverage** via smart AI cropping
+- ✅ **70% face coverage** via smart AI cropping
 - ✅ **Print sheet** generation (4×6 inch, 4 photos)
 
 ---
@@ -82,7 +83,7 @@ The `dist/` folder can be deployed to any static hosting service.
                                                          ▼
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   Final Photo   │◀────│   Smart Crop    │◀────│  Remove BG      │
-│   (400×514px)   │     │   (75% face)    │     │  (WASM)         │
+│   (400×514px)   │     │   (70% face)    │     │  (WASM)         │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
@@ -102,7 +103,7 @@ The `dist/` folder can be deployed to any static hosting service.
 ## 🛠️ Tech Stack
 
 - **React 18** - UI framework
-- **Vite 5** - Build tool
+- **Vite 7** - Build tool
 - **TailwindCSS 4** - Styling
 - **MediaPipe** - Face landmark detection (WASM)
 - **@imgly/background-removal** - Background removal (WASM)

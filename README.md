@@ -158,6 +158,27 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
+## ⚠️ Disclaimer
+
+> **IMPORTANT: Please read before use**
+
+This application is provided **AS-IS** for convenience only. By using this tool, you acknowledge:
+
+- **No Guarantee of Acceptance**: Photos generated may still be rejected by ICA or other authorities. Always verify the final photo meets all requirements before submission.
+- **Spectacles Detection Disabled**: This app does **NOT** detect or warn about eyeglasses/spectacles. ICA recommends removing glasses for passport photos.
+- **User Responsibility**: You are solely responsible for ensuring your photo complies with all ICA Singapore requirements including:
+  - No glasses or tinted lenses
+  - Neutral expression
+  - Both eyes open
+  - No head coverings (unless religious)
+  - Recent photo (within 3 months)
+- **No Liability**: The developer(s) accept no responsibility for rejected applications, wasted fees, or any other damages arising from the use of this tool.
+- **Not Official**: This is an independent open-source project and is NOT affiliated with, endorsed by, or connected to ICA Singapore or any government agency.
+
+**When in doubt, use an official photo service.**
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Camera, ShieldCheck, Zap, FileCheck, Printer, Sparkles } from 'lucide-react';
+import { Camera, ShieldCheck, Zap, FileCheck, Printer, Sparkles, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Landing() {
@@ -22,63 +22,82 @@ export default function Landing() {
                 className="text-center max-w-2xl"
             >
                 {/* Logo */}
-                <div className="mb-8 flex justify-center">
+                <div className="mb-6 flex justify-center">
                     <motion.div
                         className="p-4 bg-gradient-to-br from-teal-400 to-blue-500 rounded-3xl shadow-2xl shadow-teal-500/20"
                         whileHover={{ scale: 1.05, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
-                        <Camera className="w-14 h-14 text-white" />
+                        <Camera className="w-12 h-12 text-white" />
                     </motion.div>
                 </div>
 
                 {/* Title */}
-                <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-white to-blue-200">
+                <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-white to-blue-200">
                     OpenVisaSG
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-xl text-slate-400 mb-4">
+                <p className="text-lg text-slate-400 mb-2">
                     Professional Singapore Visa Photos
                 </p>
-                <p className="text-lg text-teal-400 font-semibold mb-10">
+                <p className="text-base text-teal-400 font-semibold mb-6">
                     100% Free • 100% Private • Runs Locally
                 </p>
+
+                {/* Before You Start Checklist */}
+                <div className="bg-slate-900/80 border border-amber-500/30 rounded-2xl p-5 mb-8 text-left">
+                    <div className="flex items-center gap-2 mb-4">
+                        <AlertTriangle className="w-5 h-5 text-amber-400" />
+                        <h2 className="text-lg font-bold text-amber-400">Before You Start</h2>
+                    </div>
+                    <ul className="space-y-2 text-sm">
+                        <ChecklistItem text="Remove glasses & sunglasses" />
+                        <ChecklistItem text="Remove head coverings (unless religious)" />
+                        <ChecklistItem text="Neutral expression, mouth closed" />
+                        <ChecklistItem text="Face camera directly, head straight" />
+                        <ChecklistItem text="Good even lighting, no shadows" />
+                        <ChecklistItem text="Hair away from face, ears visible" />
+                    </ul>
+                    <p className="text-xs text-slate-500 mt-3 italic">
+                        ⚠️ This app does NOT detect glasses. You must remove them yourself.
+                    </p>
+                </div>
 
                 {/* CTA Button */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => navigate('/capture')}
-                    className="group relative px-10 py-5 bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-400 hover:to-teal-300 text-slate-900 font-bold text-xl rounded-full shadow-[0_0_40px_rgba(45,212,191,0.3)] transition-all mb-16"
+                    className="group relative px-10 py-4 bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-400 hover:to-teal-300 text-slate-900 font-bold text-lg rounded-full shadow-[0_0_40px_rgba(45,212,191,0.3)] transition-all mb-10"
                 >
                     <span className="flex items-center gap-3">
-                        <Camera className="w-6 h-6" />
-                        Start Camera
+                        <Camera className="w-5 h-5" />
+                        I'm Ready - Start Camera
                     </span>
                 </motion.button>
 
                 {/* Feature Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
                     <FeatureCard
-                        icon={<ShieldCheck className="w-6 h-6 text-green-400" />}
+                        icon={<ShieldCheck className="w-5 h-5 text-green-400" />}
                         title="ICA Compliant"
-                        desc="400×514px, 70-80% face coverage, white background. Meets all official requirements."
+                        desc="400×514px, 70% face coverage, white background."
                     />
                     <FeatureCard
-                        icon={<Zap className="w-6 h-6 text-yellow-400" />}
+                        icon={<Zap className="w-5 h-5 text-yellow-400" />}
                         title="AI-Powered"
-                        desc="Real-time face detection, auto background removal, smart cropping. All in your browser."
+                        desc="Face detection, auto background removal, smart cropping."
                     />
                     <FeatureCard
-                        icon={<FileCheck className="w-6 h-6 text-blue-400" />}
-                        title="Live Validation"
-                        desc="Checks position, rotation, eyes open, mouth closed. Guided capture for perfect results."
+                        icon={<FileCheck className="w-5 h-5 text-blue-400" />}
+                        title="100% Private"
+                        desc="All processing happens locally. Nothing uploaded."
                     />
                 </div>
 
                 {/* Bottom Features */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-slate-800">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-800">
                     <SmallFeature icon={<Printer />} text="Print Sheet" />
                     <SmallFeature icon={<ShieldCheck />} text="No Server" />
                     <SmallFeature icon={<Sparkles />} text="White BG" />
@@ -86,31 +105,40 @@ export default function Landing() {
                 </div>
 
                 {/* Footer */}
-                <p className="text-slate-600 text-sm mt-12">
-                    Your photos never leave your device. All processing happens locally using WebAssembly.
+                <p className="text-slate-600 text-xs mt-8">
+                    Your photos never leave your device. By using this app, you accept full responsibility for ensuring your photo meets ICA requirements.
                 </p>
             </motion.div>
         </div>
     );
 }
 
+function ChecklistItem({ text }) {
+    return (
+        <li className="flex items-center gap-2 text-slate-300">
+            <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+            {text}
+        </li>
+    );
+}
+
 function FeatureCard({ icon, title, desc }) {
     return (
         <motion.div
-            className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm hover:border-slate-700 transition-colors"
-            whileHover={{ y: -5 }}
+            className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm hover:border-slate-700 transition-colors"
+            whileHover={{ y: -3 }}
         >
-            <div className="mb-3">{icon}</div>
-            <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-            <p className="text-sm text-slate-400 leading-relaxed">{desc}</p>
+            <div className="mb-2">{icon}</div>
+            <h3 className="text-base font-semibold text-white mb-1">{title}</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">{desc}</p>
         </motion.div>
     );
 }
 
 function SmallFeature({ icon, text }) {
     return (
-        <div className="flex items-center gap-2 text-slate-500 text-sm">
-            <span className="text-slate-600">{React.cloneElement(icon, { className: 'w-4 h-4' })}</span>
+        <div className="flex items-center gap-2 text-slate-500 text-xs">
+            <span className="text-slate-600">{React.cloneElement(icon, { className: 'w-3 h-3' })}</span>
             {text}
         </div>
     );

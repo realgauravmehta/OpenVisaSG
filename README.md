@@ -27,6 +27,22 @@ OpenVisaSG creates **ICA-compliant Singapore visa photos** directly in your brow
 
 ---
 
+## 📋 Before You Start
+
+> **Complete this checklist BEFORE taking your photo:**
+
+| ✓ | Requirement | Why |
+|---|-------------|-----|
+| ☐ | **Remove glasses** | ICA recommends no eyewear; app does NOT detect glasses |
+| ☐ | **Remove head coverings** | Unless worn daily for religious reasons |
+| ☐ | **Neutral expression** | No smiling, mouth closed |
+| ☐ | **Face the camera directly** | Head straight, not tilted |
+| ☐ | **Good lighting** | Even light on face, no shadows |
+| ☐ | **Plain background** | App removes it, but plain works better |
+| ☐ | **Hair away from face** | Both ears should be visible |
+
+---
+
 ## ✨ Features
 
 | Feature | Description |

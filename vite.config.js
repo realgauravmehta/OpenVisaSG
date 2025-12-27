@@ -8,8 +8,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  // GitHub Pages deployment - use repository name as base path
-  // Change 'OpenVisaSG' to your actual repository name if different
   base: '/OpenVisaSG/',
   build: {
     outDir: 'dist',

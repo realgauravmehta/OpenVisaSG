@@ -22,8 +22,9 @@ OpenVisaSG creates **ICA-compliant Singapore visa photos** directly in your brow
 - ✅ **400×514px** output (official ICA digital format)
 - ✅ **35×45mm** aspect ratio
 - ✅ **White background** automatically applied
-- ✅ **70% face coverage** via smart AI cropping
-- ✅ **Print sheet** generation (4×6 inch, 4 photos)
+- ✅ **65% face coverage** (80% face + 20% shoulders visible)
+- ✅ **HD Capture** (1920×1080 Full HD)
+- ✅ **Print sheet** generation (4×6 inch, 4 photos at 300 DPI)
 
 ---
 
@@ -99,7 +100,7 @@ The `dist/` folder can be deployed to any static hosting service.
                                                          ▼
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   Final Photo   │◀────│   Smart Crop    │◀────│  Remove BG      │
-│   (400×514px)   │     │   (70% face)    │     │  (WASM)         │
+│   (400×514px)   │     │   (65% face)    │     │  (WASM)         │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
@@ -109,9 +110,10 @@ The `dist/` folder can be deployed to any static hosting service.
 |-------------|----------------|
 | Dimensions | 400×514 pixels |
 | Aspect ratio | 35:45mm |
-| Face coverage | 70-80% of height |
+| Face coverage | 65% (with shoulders visible) |
 | Background | Plain white (#FFFFFF) |
-| Eye position | ~47% from top |
+| Eye position | ~40% from top |
+| Capture Resolution | 1920×1080 HD |
 | Format | JPEG |
 
 ---

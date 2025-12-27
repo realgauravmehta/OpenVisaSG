@@ -167,8 +167,8 @@ export default function CaptureFlow() {
                 </button>
 
                 <div className={`px-4 py-2 rounded-full text-sm font-bold backdrop-blur-md transition-all ${faceDetected
-                        ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                        : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/50'
+                    ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                    : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/50'
                     }`}>
                     {isModelLoading ? "Loading AI..." : status}
                 </div>
@@ -183,9 +183,11 @@ export default function CaptureFlow() {
                         ref={webcamRef}
                         audio={false}
                         screenshotFormat="image/jpeg"
-                        screenshotQuality={0.95}
+                        screenshotQuality={1.0}
                         videoConstraints={{
-                            facingMode: "user"
+                            facingMode: "user",
+                            width: { ideal: 1920, min: 1280 },
+                            height: { ideal: 1080, min: 720 }
                         }}
                         className="absolute inset-0 w-full h-full object-cover"
                         mirrored={true}
@@ -206,8 +208,8 @@ export default function CaptureFlow() {
                     <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-10">
                         {/* Very subtle oval guide - just for reference */}
                         <div className={`w-[60%] max-w-[400px] aspect-[35/45] border-2 border-dashed rounded-[50%] transition-all duration-300 ${faceDetected
-                                ? 'border-green-400/50'
-                                : 'border-white/20'
+                            ? 'border-green-400/50'
+                            : 'border-white/20'
                             }`} />
                     </div>
                 )}
@@ -229,8 +231,8 @@ export default function CaptureFlow() {
                         onClick={handleCapture}
                         disabled={!faceDetected || isModelLoading}
                         className={`w-20 h-20 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${faceDetected
-                                ? 'border-green-500 bg-green-500/20 cursor-pointer hover:scale-105 active:scale-95'
-                                : 'border-slate-700 opacity-50 cursor-not-allowed'
+                            ? 'border-green-500 bg-green-500/20 cursor-pointer hover:scale-105 active:scale-95'
+                            : 'border-slate-700 opacity-50 cursor-not-allowed'
                             }`}
                     >
                         <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-colors ${faceDetected ? 'bg-white' : 'bg-slate-600'

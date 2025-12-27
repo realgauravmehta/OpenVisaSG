@@ -9,16 +9,21 @@ import { removeBackground } from '@imgly/background-removal';
  */
 
 export class ImageProcessor {
-    // ICA Dimensions
+    // ICA Digital Photo Dimensions (for online submission)
     static TARGET_WIDTH = 400;
     static TARGET_HEIGHT = 514;
-    static TARGET_RATIO = 400 / 514;  // 0.778
+    static TARGET_RATIO = 400 / 514;  // 0.778 (35:45mm)
 
-    // ICA Face Coverage: 70-80% (we target 70% for more headroom)
-    static TARGET_FACE_RATIO = 0.70;
+    // HD Print Dimensions (35x45mm at 600 DPI for high quality prints)
+    static HD_WIDTH = 827;   // 35mm at 600 DPI
+    static HD_HEIGHT = 1063; // 45mm at 600 DPI
 
-    // Eye position: ~47% from top
-    static EYE_POSITION_RATIO = 0.47;
+    // ICA Face Coverage: Should be ~70-80% of photo height
+    // Using 65% to ensure 80% face + 20% shoulders visible
+    static TARGET_FACE_RATIO = 0.65;
+
+    // Eye position: ~40% from top (gives more room for hair and shoulders)
+    static EYE_POSITION_RATIO = 0.40;
 
     /**
      * Main processing pipeline
@@ -29,9 +34,14 @@ export class ImageProcessor {
     static async process(imageSrc, landmarks) {
         console.log("[Processor] Starting ICA photo processing...");
 
-        // Step 1: Remove Background
+        // Step 1: Remove Background with quality settings for sharp edges
         console.log("[Processor] Removing background...");
         const blob = await removeBackground(imageSrc, {
+            model: 'medium',  // Use medium model for better edge accuracy
+            output: {
+                format: 'image/png',  // PNG for lossless edges during processing
+                quality: 1.0
+            },
             progress: (key, current, total) => {
                 console.log(`[Processor] ${key}: ${Math.round((current / total) * 100)}%`);
             }
@@ -41,15 +51,22 @@ export class ImageProcessor {
         const bitmap = await createImageBitmap(blob);
         console.log(`[Processor] Background removed. Image: ${bitmap.width}x${bitmap.height}`);
 
-        // Step 2: Create output canvas
+        // Step 2: Create output canvas with crisp rendering
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = this.TARGET_WIDTH;
         canvas.height = this.TARGET_HEIGHT;
 
+        // Disable image smoothing for sharp pixel-perfect edges
+        ctx.imageSmoothingEnabled = false;
+
         // Fill with pure white background
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, this.TARGET_WIDTH, this.TARGET_HEIGHT);
+
+        // Re-enable smoothing for the actual image draw (prevents pixelation)
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
 
         // Step 3: Calculate safe crop region
         const cropBox = this.calculateSafeCrop(landmarks, bitmap.width, bitmap.height);
@@ -99,13 +116,15 @@ export class ImageProcessor {
         const faceBottom = chin.y * imgH;
         const faceLeft = (leftCheek?.x || noseTip.x - 0.1) * imgW;
         const faceRight = (rightCheek?.x || noseTip.x + 0.1) * imgW;
-        
+
         const faceHeight = Math.abs(faceBottom - faceTop);
         const faceWidth = Math.abs(faceRight - faceLeft);
-        const faceCenterX = (faceLeft + faceRight) / 2;
+
+        // Use nose tip as the primary center reference (most reliable)
+        const faceCenterX = noseTip.x * imgW;
         const eyeCenterY = ((leftEye?.y || forehead.y) + (rightEye?.y || forehead.y)) / 2 * imgH;
 
-        console.log(`[Processor] Face: ${faceWidth.toFixed(0)}x${faceHeight.toFixed(0)}px at center (${faceCenterX.toFixed(0)}, ${eyeCenterY.toFixed(0)})`);
+        console.log(`[Processor] Face: ${faceWidth.toFixed(0)}x${faceHeight.toFixed(0)}px, center X: ${faceCenterX.toFixed(0)}, eye Y: ${eyeCenterY.toFixed(0)}`);
 
         // ICA: Face should be ~70% of final photo height
         // targetPhotoHeight = faceHeight / 0.70
@@ -129,7 +148,8 @@ export class ImageProcessor {
         // cropY = eyeY - (photoHeight * 0.47)
         let cropY = eyeCenterY - (targetPhotoH * this.EYE_POSITION_RATIO);
 
-        // Horizontal: Center on face
+        // Horizontal: Center on nose (face center)
+        // This ensures the face is horizontally centered in the output
         let cropX = faceCenterX - (targetPhotoW / 2);
 
         // BOUNDARY CLAMPING: Ensure crop stays within image
